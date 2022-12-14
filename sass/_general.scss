@@ -1,0 +1,58 @@
+:root {
+    --main-color: #252525;
+    --main-text: 'Circe', sans-serif;
+}
+.quiz {
+    max-width: 440px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-answer {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #c2c2c2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.quiz-success {
+    background: green;
+    color: #fff;
+}
+
+.quiz-error {
+    background: red;
+    color: #fff;
+}
+
+.quiz-hidden {
+    pointer-events: none;
+    position: relative;
+    z-index: -1;
+}
+
+.quiz-button {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background: #c4c4c4;
+    pointer-events: none;
+}
+
+.quiz-button-active {
+    background: red;
+    pointer-events: all;
+}
