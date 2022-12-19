@@ -1,12 +1,14 @@
 const questions = [
     'Год основания компании ОКЕЙ',
     'Где расположен офис компании?',
-    'Бренд компании'
+    'Бренд компании',
+    'Сколько магазинов компании ОКЕЙ в России?',
+    'Вам понравился квиз?'
 ];
 const answers = [
     [
         {
-            content: '2001',
+            content: '2002',
             true: true
         },
         {
@@ -45,12 +47,42 @@ const answers = [
             content: 'То, что надо!',
             true: true
         }
+    ],
+    [
+        {
+            content: '32',
+            true: false
+        },
+        {
+            content: '79',
+            true: true
+        },
+        {
+            content: '54',
+            true: false
+        }
+    ],
+    [
+        {
+            content: 'Да',
+            true: true
+        },
+        {
+            content: 'Нет',
+            true: false
+        },
+        {
+            content: 'Могло быть и лучше',
+            true: false
+        }
     ]
 ];
 const answerTrue = [
     'Год основания компании - 2001',
     'Офис компании находится в Москве',
-    'Торговая марка - То, что надо!'
+    'Торговая марка - То, что надо!',
+    'Всего в России 79 гипермаркетов ОКЕЙ',
+    'Вот тут обидно было'
 ]
 
 const questionsItem = document.querySelector('.quiz-question');
