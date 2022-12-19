@@ -59,40 +59,46 @@ let answerItem = document.querySelectorAll('.quiz-answer');
 const quizButton = document.querySelector('.quiz-button');
 const quizMessage = document.querySelector('.quiz-message');
 let x = 0;
+let trueAnswer = 0;
 goQuiz();
 function goQuiz() {
-    if (x <= 2) {
+    if (x < questions.length) {
         let i = 0;
         quizAnswers.innerHTML = '';
         questionsItem.innerHTML = questions[x];
         while(i <= 2) {
             let answerItem = document.createElement('div');
             answerItem.classList.add('quiz-answer');
-            if(x === 0) {
-                answerItem.innerHTML = answers[0][i].content;
-                answerItem.dataset.true = answers[0][i].true; 
-            }
-            if(x === 1) {
-                answerItem.innerHTML = answers[1][i].content; 
-                answerItem.dataset.true = answers[1][i].true; 
-            }
-            if(x === 2) {
-                answerItem.innerHTML = answers[2][i].content; 
-                answerItem.dataset.true = answers[2][i].true; 
-            }
+            answerItem.innerHTML = answers[x][i].content;
+            answerItem.dataset.true = answers[x][i].true; 
             quizAnswers.append(answerItem);
             i++;
         }
     }
-    if (x > 2) {
-        questionsItem.innerHTML = 'Поздравляем! Ваш промокод';
-        quizAnswers.innerHTML = 'kkS9@000';
+    if (x >= questions.length) {
+        questionsItem.innerHTML = '';
+        quizAnswers.innerHTML = '';
         quizButton.style.display = 'none';
+        const thankMessage = document.createElement('div');
+        const calcAnswers = document.createElement('div');
+        const thankMessageHeader = document.createElement('h5');
+        const thankMessageMain = document.createElement('span');
+        const questionAll = document.createElement('span');
+        const questionTrue = document.createElement('span');
+        questionAll.classList.add('number');
+        questionTrue.classList.add('number');
+        calcAnswers.classList.add('calc-answers');
+        questionAll.innerHTML = questions.length;
+        questionTrue.innerHTML = trueAnswer;
+        thankMessageHeader.innerHTML = 'Спасибо!';
+        calcAnswers.append(questionTrue, 'из', questionAll);
+        thankMessageMain.innerHTML = 'Вы прошли тест! <br> Верных ответов';
+        thankMessageMain.append(calcAnswers);
+        thankMessage.prepend(thankMessageHeader,thankMessageMain);
+        quizAnswers.innerHTML = thankMessage.innerHTML;
     }
     x++;
 }
-
-
 function checkAnswer() {
     answerItem = document.querySelectorAll('.quiz-answer');
     answerItem.forEach(function(el) {
@@ -100,6 +106,7 @@ function checkAnswer() {
             if(el.getAttribute('data-true') === 'true') {
                 el.classList.add('quiz-success');
                 quizMessage.innerHTML = 'Верно';
+                trueAnswer++
             }else{
                 el.classList.add('quiz-error');
                 quizMessage.innerHTML = answerTrue[x - 1];
@@ -110,8 +117,7 @@ function checkAnswer() {
             quizButton.classList.add('quiz-button-active');
         });
     });
-    
-}
+};
 checkAnswer();
 quizButton.addEventListener('click', () => {
     quizMessage.innerHTML = '';
