@@ -128,8 +128,8 @@ function gameOver() {
     hideTimer();
 }
 function hideTimer() {
-    clearInterval(timerUp);
     timerItem.style.display = 'none';
+    clearInterval(timerUp);
 }
 const questionsItem = document.querySelector('.quiz-question');
 const quizAnswers = document.querySelector('.quiz-answers');
@@ -175,6 +175,7 @@ function goQuiz() {
         thankMessageMain.append(calcAnswers);
         thankMessage.prepend(thankMessageHeader,thankMessageMain);
         quizAnswers.innerHTML = thankMessage.innerHTML;
+        hideTimer();
     }
     x++;
 }
@@ -200,7 +201,6 @@ function checkAnswer() {
                 answerItem[a].classList.add('quiz-hidden')
             }
             quizButton.classList.add('quiz-button-active');
-            console.log(live);
         });
     });
 };
@@ -211,6 +211,10 @@ quizButton.addEventListener('click', () => {
     goQuiz();
     checkAnswer();
     quizButton.classList.remove('quiz-button-active');
-    timerUp = setInterval(timerUpdate, 1000);
-    timer = 10;
+    if(x > questions.length) {
+        hideTimer();
+    }else{
+        timerUp = setInterval(timerUpdate, 1000);
+        timer = 10;
+    }
 });
