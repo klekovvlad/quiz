@@ -78,7 +78,7 @@ const answers = [
     ]
 ];
 const answerTrue = [
-    'Год основания компании - 2001',
+    'Год основания компании - 2002',
     'Офис компании находится в Москве',
     'Торговая марка - То, что надо!',
     'Всего в России 79 гипермаркетов ОКЕЙ',
@@ -135,6 +135,7 @@ function checkAnswer() {
     answerItem = document.querySelectorAll('.quiz-answer');
     answerItem.forEach(function(el) {
         el.addEventListener('click', () => {
+            quizMessage.classList.add('quiz-message-show');
             if(el.getAttribute('data-true') === 'true') {
                 el.classList.add('quiz-success');
                 quizMessage.innerHTML = 'Верно';
@@ -152,6 +153,7 @@ function checkAnswer() {
 };
 checkAnswer();
 quizButton.addEventListener('click', () => {
+    quizMessage.classList.remove('quiz-message-show');
     quizMessage.innerHTML = '';
     goQuiz();
     checkAnswer();
