@@ -183,6 +183,7 @@ function checkAnswer() {
     answerItem.forEach(function(el) {
         el.addEventListener('click', () => {
             quizMessage.classList.add('quiz-message-show');
+            clearInterval(timerUp);
             if(el.getAttribute('data-true') === 'true') {
                 el.classList.add('quiz-success');
                 quizMessage.innerHTML = 'Верно';
@@ -210,5 +211,6 @@ quizButton.addEventListener('click', () => {
     goQuiz();
     checkAnswer();
     quizButton.classList.remove('quiz-button-active');
-    timer = 25;
+    timerUp = setInterval(timerUpdate, 1000);
+    timer = 10;
 });
