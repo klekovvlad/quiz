@@ -47,6 +47,7 @@ a {
           justify-content: center;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .quiz-question {
@@ -254,4 +255,49 @@ span {
   font-weight: 500;
   color: #252525;
   background: #fff;
+}
+
+.quiz__lives {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.quiz__live {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: red;
+  margin-right: 8px;
+  border: 1px solid red;
+}
+
+.quiz__live-remove {
+  background: transparent;
+}
+
+.quiz__timer {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #252525;
+  padding: 5px 20px;
+  width: 80px;
+  background: #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.quiz__game-over {
+  font-size: 28px;
+  color: #fff;
+  font-weight: 700;
 }/*# sourceMappingURL=main.css.map */

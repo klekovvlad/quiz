@@ -1,3 +1,4 @@
+const quiz = document.querySelector('.quiz');
 const questions = [
     'Год основания компании ОКЕЙ',
     'Где расположен офис компании?',
@@ -83,13 +84,59 @@ const answerTrue = [
     'Торговая марка - То, что надо!',
     'Всего в России 79 гипермаркетов ОКЕЙ',
     'Вот тут обидно было'
-]
+];
 
+let live = 3;
+const liveItem = document.createElement('div');
+liveItem.classList.add('quiz__lives');
+for (n = 1; n <= live; n++) {
+    const liveItems = document.createElement('div');
+    liveItems.classList.add('quiz__live');
+    liveItem.append(liveItems);
+};
+
+function minusLive() {
+    live--;
+    const liveItems = document.querySelectorAll('.quiz__live');
+    liveItems[live].classList.add('quiz__live-remove');
+};
+
+let timer = 10;
+const timerItem = document.createElement('div');
+timerItem.classList.add('quiz__timer');
+timerItem.innerHTML = timer;
+timerUp = setInterval(timerUpdate, 1000);
+function timerUpdate() {
+    timer--;
+    timerItem.innerHTML = timer;
+    if(timer === 0) {
+        clearInterval(timerUp);
+        gameOver();
+    }
+};
+quiz.prepend(liveItem, timerItem);
+
+function gameOver() {
+    questionsItem.innerHTML = '';
+    quizAnswers.innerHTML = '';
+    quizButton.style.display = 'none';
+    quizMessage.style.display = 'none';
+    const gameOver = document.createElement('div');
+    gameOver.classList.add('quiz__game-over');
+    gameOver.innerHTML = 'Игра закончена';
+    quizAnswers.append(gameOver);
+    hideTimer();
+}
+function hideTimer() {
+    clearInterval(timerUp);
+    timerItem.style.display = 'none';
+}
 const questionsItem = document.querySelector('.quiz-question');
 const quizAnswers = document.querySelector('.quiz-answers');
 let answerItem = document.querySelectorAll('.quiz-answer');
 const quizButton = document.querySelector('.quiz-button');
 const quizMessage = document.querySelector('.quiz-message');
+
 let x = 0;
 let trueAnswer = 0;
 goQuiz();
@@ -143,11 +190,16 @@ function checkAnswer() {
             }else{
                 el.classList.add('quiz-error');
                 quizMessage.innerHTML = answerTrue[x - 1];
+                minusLive();
+                if(live === 0) {
+                    gameOver();
+                }
             }
             for(let a = 0; a <= 2; a++) {
                 answerItem[a].classList.add('quiz-hidden')
             }
             quizButton.classList.add('quiz-button-active');
+            console.log(live);
         });
     });
 };
@@ -158,4 +210,5 @@ quizButton.addEventListener('click', () => {
     goQuiz();
     checkAnswer();
     quizButton.classList.remove('quiz-button-active');
+    timer = 25;
 });
